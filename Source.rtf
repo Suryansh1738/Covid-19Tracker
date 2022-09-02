@@ -1,0 +1,328 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 Source Code:\par
+Main Activity:\par
+ package com.example.covid_19_tracker\par
+import android.support.v7.widget.RecyclerView\par
+import android.view.LayoutInflater\par
+import android.view.View\par
+import android.view.ViewGroup\par
+import android.widget.TextView\par
+class StateRVAdapter (private val stateList:List<StateModel>) :\par
+ RecyclerView.Adapter<StateRVAdapter.StatRVViewHolder>() \{\par
+ class StatRVViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView)\{\par
+ val stateNameTV:TextView = itemView.findViewById(R.id.idTVState)\par
+ val casesTV:TextView = itemView.findViewById(R.id.idTVCases)\par
+ val deathsTV:TextView = itemView.findViewById(R.id.idTVDeaths)\par
+ val recoveredTV:TextView = itemView.findViewById(R.id.idTVRecovered)\par
+ \}\par
+ override fun onCreateViewHolder(p0: ViewGroup, p1: Int): StatRVViewHolder \{\par
+ val itemView = LayoutInflater.from(p0.context).inflate(R.layout.state_rv_item,p0,false)\par
+ return StatRVViewHolder(itemView)\par
+ \}\par
+ override fun onBindViewHolder(p0: StatRVViewHolder, p1: Int) \{\par
+ val stateData = stateList[p1]\par
+ p0.casesTV.text = stateData.cases.toString()\par
+ p0.stateNameTV.text = stateData.state\par
+ p0.deathsTV.text = stateData.deaths.toString()\par
+ p0.recoveredTV.text = stateData.recovered.toString()\par
+ \}\par
+ override fun getItemCount(): Int \{\par
+ return stateList.size\par
+ \}\par
+\}\par
+6.2.2 State Model:\par
+package com.example.covid_19_tracker\par
+data class StateModel (\par
+ val state:String,\par
+ val recovered:Int,\par
+ val deaths:Int,\par
+ val cases:Int,\par
+)\par
+\par
+StateRVAdapter:\par
+package com.example.covid_19_tracker\par
+import android.support.v7.widget.RecyclerView\par
+import android.view.LayoutInflater\par
+import android.view.View\par
+import android.view.ViewGroup\par
+import android.widget.TextView\par
+class StateRVAdapter (private val stateList:List<StateModel>) :\par
+ RecyclerView.Adapter<StateRVAdapter.StatRVViewHolder>() \{\par
+ class StatRVViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView)\{\par
+ val stateNameTV:TextView = itemView.findViewById(R.id.idTVState)\par
+ val casesTV:TextView = itemView.findViewById(R.id.idTVCases)\par
+ val deathsTV:TextView = itemView.findViewById(R.id.idTVDeaths)\par
+ val recoveredTV:TextView = itemView.findViewById(R.id.idTVRecovered)\par
+ \}\par
+ override fun onCreateViewHolder(p0: ViewGroup, p1: Int): StatRVViewHolder \{\par
+ val itemView = LayoutInflater.from(p0.context).inflate(R.layout.state_rv_item,p0,false)\par
+ return StatRVViewHolder(itemView)\par
+ \}\par
+ override fun onBindViewHolder(p0: StatRVViewHolder, p1: Int) \{\par
+ val stateData = stateList[p1]\par
+ p0.casesTV.text = stateData.cases.toString()\par
+ p0.stateNameTV.text = stateData.state\par
+ p0.deathsTV.text = stateData.deaths.toString()\par
+ p0.recoveredTV.text = stateData.recovered.toString()\par
+ \}\par
+ override fun getItemCount(): Int \{\par
+ return stateList.size\par
+ \}\par
+\}\par
+\par
+activity_main.xml:\par
+<?xml version="1.0" encoding="utf-8"?>\par
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"\par
+ xmlns:app="http://schemas.android.com/apk/res-auto"\par
+ xmlns:tools="http://schemas.android.com/tools"\par
+ android:orientation="vertical"\par
+ android:layout_width="match_parent"\par
+ android:layout_height="match_parent"\par
+ tools:context=".MainActivity">\par
+ <android.support.v7.widget.CardView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:layout_margin="3dp"\par
+ app:cardCornerRadius="3dp"\par
+ app:cardElevation="3dp"\par
+ >\par
+ <LinearLayout\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ >\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="World wide Recodrd"\par
+ android:textAlignment="center"\par
+ android:gravity="center_horizontal"\par
+ android:textSize="18sp"\par
+ android:padding="3dp"\par
+ android:layout_margin="3dp"\par
+ android:textColor="@color/black"\par
+ />\par
+ <LinearLayout\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="horizontal"\par
+ android:weightSum="3"\par
+ >\par
+ <LinearLayout\par
+ android:layout_width="0dp"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ android:layout_weight="1"\par
+ >\par
+<TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Cases"\par
+ android:padding="4dp"\par
+ android:textSize="15sp"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/black"\par
+ android:textStyle="bold"\par
+ />\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Number of Cases"\par
+ android:id="@+id/idTVWorldCases"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/red"\par
+ android:padding="4dp"\par
+ android:textSize="12sp"\par
+ />\par
+ </LinearLayout>\par
+ <LinearLayout\par
+ android:layout_width="0dp"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ android:layout_weight="1"\par
+ >\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Recovered"\par
+ android:padding="4dp"\par
+ android:textSize="15sp"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/black"\par
+ android:textStyle="bold"\par
+ />\par
+<TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Number of Recovered"\par
+ android:id="@+id/idTVWorldRecovered"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/blue"\par
+ android:padding="4dp"\par
+ android:textSize="12sp"\par
+ />\par
+ </LinearLayout>\par
+ <LinearLayout\par
+ android:layout_width="0dp"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ android:layout_weight="1"\par
+ >\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Deaths"\par
+ android:padding="4dp"\par
+ android:textSize="15sp"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/black"\par
+ android:textStyle="bold"\par
+ />\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Number of Cases"\par
+ android:id="@+id/idTVWorldDeaths"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/purple_200"\par
+ android:padding="4dp"\par
+ android:textSize="12sp"\par
+ />\par
+ </LinearLayout>\par
+ </LinearLayout>\par
+ </LinearLayout>\par
+</android.support.v7.widget.CardView>\par
+ <android.support.v7.widget.CardView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:layout_margin="3dp"\par
+ app:cardCornerRadius="3dp"\par
+ app:cardElevation="3dp"\par
+ >\par
+ <LinearLayout\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ >\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Indian Recodrd"\par
+ android:textAlignment="center"\par
+ android:gravity="center_horizontal"\par
+ android:textSize="18sp"\par
+ android:padding="3dp"\par
+ android:layout_margin="3dp"\par
+ android:textColor="@color/black"\par
+ />\par
+ <LinearLayout\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="horizontal"\par
+ android:weightSum="3"\par
+ >\par
+ <LinearLayout\par
+ android:layout_width="0dp"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ android:layout_weight="1"\par
+ >\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Cases"\par
+ android:padding="4dp"\par
+ android:textSize="15sp"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/black"\par
+ android:textStyle="bold"\par
+ />\par
+\par
+<TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Number of Cases"\par
+ android:id="@+id/idTVIndiaCases"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/red"\par
+ android:padding="4dp"\par
+ android:textSize="12sp"\par
+ />\par
+ </LinearLayout>\par
+ <LinearLayout\par
+ android:layout_width="0dp"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ android:layout_weight="1"\par
+ >\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Recovered"\par
+ android:padding="4dp"\par
+ android:textSize="15sp"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/black"\par
+ android:textStyle="bold"\par
+ />\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Number of Recovered"\par
+ android:id="@+id/idTVIndiaRecovered"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/blue"\par
+ android:padding="4dp"\par
+ android:textSize="12sp"\par
+ />\par
+ </LinearLayout>\par
+ <LinearLayout\par
+ android:layout_width="0dp"\par
+ android:layout_height="wrap_content"\par
+ android:orientation="vertical"\par
+ android:layout_weight="1"\par
+ >\par
+<TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Deaths"\par
+ android:padding="4dp"\par
+ android:textSize="15sp"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/black"\par
+ android:textStyle="bold"\par
+ />\par
+ <TextView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:text="Number of Cases"\par
+ android:id="@+id/idTVIndiaDeaths"\par
+ android:textAlignment="center"\par
+ android:layout_gravity="center_horizontal"\par
+ android:textColor="@color/purple_200"\par
+ android:padding="4dp"\par
+ android:textSize="12sp"\par
+ />\par
+ </LinearLayout>\par
+ </LinearLayout>\par
+ </LinearLayout>\par
+ </android.support.v7.widget.CardView>\par
+ <android.support.v7.widget.RecyclerView\par
+ android:layout_width="match_parent"\par
+ android:layout_height="wrap_content"\par
+ android:id="@+id/idRVStates" />\par
+</LinearLayout>\par
+}
+ 
